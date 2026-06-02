@@ -20,7 +20,7 @@ public class BookController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("All")]
+    [HttpGet]
     public IActionResult Get()
     {
         if (_books.Count == 0)
@@ -33,44 +33,54 @@ public class BookController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        var searchedBook = _books.Find(book => book.Id == id);
-        if (searchedBook != null)
+        var searchedBook = _books.Find(b => b.Id == id);
+        if (searchedBook == null)
         {
-            return Ok(searchedBook);
+            return NotFound($"Book with id: {id} not found");
         }
         
-        return NotFound($"Book with id: {id} not found");
+        return Ok(searchedBook);
     }
 
-    [HttpPost("Add")]
+    [HttpPost]
     public IActionResult Post(Book book)
     {
+        var existingBook = _books.Find(b => b.Id == book.Id);
+        if (existingBook != null)
+        {
+            return BadRequest("Book already exists");
+        }
+        
         _books.Add(book);
-        return Ok("Book added");
+        return CreatedAtAction(nameof(Get), new { id = book.Id }, book);
     }
 
-    [HttpPut("Update/{id}")]
+    [HttpPut("{id}")]
     public IActionResult Put(int id, Book book)
     {
-        var bookToUpdate = _books.Find(book => book.Id == id);
-        if (bookToUpdate != null)
+        var bookToUpdate = _books.Find(b => b.Id == id);
+        if (bookToUpdate == null)
         {
-            _books.Remove(bookToUpdate);
-            _books.Add(book);
-            return Ok("Book updated");
+            return NotFound($"Book with id: {id} not found");
         }
-        return NotFound($"Book with id: {id} not found");
+        
+        bookToUpdate.Title = book.Title;
+        bookToUpdate.Description = book.Description;
+        bookToUpdate.Isbn = book.Isbn;
+        
+        return NoContent();
     }
 
-    [HttpDelete("Delete/{id}")]
+    [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var bookToDelete = _books.Find(book => book.Id == id);
-        if (bookToDelete != null)
+        var bookToDelete = _books.Find(b => b.Id == id);
+        if (bookToDelete == null)
         {
-            _books.Remove(bookToDelete);
-            return Ok("Book deleted");
+            return NotFound($"Book with id: {id} not found");
         }
-        return NotFound($"Book with id: {id} not found");
+
+        _books.Remove(bookToDelete);
+        return NoContent();
     }
 }
