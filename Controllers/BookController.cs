@@ -20,53 +20,57 @@ public class BookController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
-    public IEnumerable<Book> Get()
+    [HttpGet("All")]
+    public IActionResult Get()
     {
-        return _books.ToArray();
+        if (_books.Count == 0)
+        {
+            return NotFound("No books found");
+        }
+        return Ok(_books);
     }
 
     [HttpGet("{id}")]
-    public Book? Get(int id)
+    public IActionResult Get(int id)
     {
         var searchedBook = _books.Find(book => book.Id == id);
         if (searchedBook != null)
         {
-            return searchedBook;
+            return Ok(searchedBook);
         }
         
-        return null;
+        return NotFound($"Book with id: {id} not found");
     }
 
-    [HttpPost]
-    public bool Post(Book book)
+    [HttpPost("Add")]
+    public IActionResult Post(Book book)
     {
         _books.Add(book);
-        return true;
+        return Ok("Book added");
     }
 
-    [HttpPut("{id}")]
-    public Boolean Put(int id, Book book)
+    [HttpPut("Update/{id}")]
+    public IActionResult Put(int id, Book book)
     {
         var bookToUpdate = _books.Find(book => book.Id == id);
         if (bookToUpdate != null)
         {
             _books.Remove(bookToUpdate);
             _books.Add(book);
-            return true;
+            return Ok("Book updated");
         }
-        return false;
+        return NotFound($"Book with id: {id} not found");
     }
 
-    [HttpDelete("{id}")]
-    public Boolean Delete(int id)
+    [HttpDelete("Delete/{id}")]
+    public IActionResult Delete(int id)
     {
         var bookToDelete = _books.Find(book => book.Id == id);
         if (bookToDelete != null)
         {
             _books.Remove(bookToDelete);
-            return true;
+            return Ok("Book deleted");
         }
-        return false;
+        return NotFound($"Book with id: {id} not found");
     }
 }

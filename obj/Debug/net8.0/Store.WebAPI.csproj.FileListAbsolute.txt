@@ -30,3 +30,4 @@
 /Users/antonio/RiderProjects/Store/obj/Debug/net8.0/Store.WebAPI.pdb
 /Users/antonio/RiderProjects/Store/obj/Debug/net8.0/Store.WebAPI.genruntimeconfig.cache
 /Users/antonio/RiderProjects/Store/obj/Debug/net8.0/ref/Store.WebAPI.dll
+/Users/antonio/RiderProjects/Store/obj/Debug/net8.0/Store.WebAPI.sourcelink.json
