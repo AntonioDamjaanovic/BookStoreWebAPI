@@ -1,0 +1,54 @@
+
+CREATE TABLE "Hospital" (
+    "Id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "Name" VARCHAR(255) NOT NULL,
+    "Location" VARCHAR(255) not NULL,
+    "Capacity" INT
+);
+
+CREATE TABLE "Specialization" (
+    "Id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "Description" VARCHAR(255) NOT NULL
+);
+
+create table "Doctor" (
+	"Id" int generated always as identity primary key,
+	"Firstname" varchar(255) not null,
+	"Lastname" varchar(255) not null,
+	"SpecializationId" int references "Specialization" ("Id"),
+	"HospitalId" int references "Hospital" ("Id")
+);
+
+create table "Nurse" (
+	"Id" int generated always as identity primary key,
+	"Firstname" varchar(255) not null,
+	"Lastname" varchar(255) not null,
+	"HospitalId" int references "Hospital" ("Id")
+);
+
+create table "Patient" (
+	"Id" int generated always as identity primary key,
+	"Firstname" varchar(255) not null,
+	"Lastname" varchar(255) not null,
+	"Address" varchar(255) not null,
+	"HospitalId" int references "Hospital" ("Id")
+);
+
+create table "DoctorPatient" (
+	"DoctorId" int not null references "Doctor" ("Id") on delete cascade,
+	"PatientId" int not null references "Patient" ("Id") on delete cascade,
+	"Condition" varchar(255),
+	"Treatment" varchar(255),
+    "AdmissionTime" timestamp not null,
+    "ReleaseTime" timestamp,
+    primary key ("DoctorId", "PatientId"),
+    
+    constraint "check_release_time"
+    	check ("ReleaseTime" is null or "ReleaseTime" > "AdmissionTime")
+);
+
+create table "DoctorHospital" (
+	"HospitalId" int not null references "Hospital" ("Id") on delete cascade,
+	"DoctorId" int not null references "Doctor" ("Id") on delete cascade,
+	primary key ("HospitalId", "DoctorId")
+);

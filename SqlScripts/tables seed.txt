@@ -1,0 +1,54 @@
+insert into "Hospital" ("Name", "Location", "Capacity") values
+	('KBC Zagreb', 'Zagreb', 3000),
+	('KPC Split', 'Osijek', 2000),
+	('KBC Rijeka', 'Rijeka', 1500),
+	('KBC Osijek', 'Osijek', 1000);
+
+insert into "Specialization" 
+	("Description") values
+	('Cardiology'),
+    ('Pediatrics'),
+    ('Neurology'),
+    ('Orthopedics'),
+    ('Dermatology');
+
+insert into "Doctor" 
+	("Firstname", "Lastname", "SpecializationId", "HospitalId") values
+	('Ana', 'Horvat', 1, 1),
+	('Marko', 'Kovač', 3, 1),
+	('Petra', 'Babić', 2, 2),
+	('Luka', 'Idžanović', 4, 3),
+	('Antonio', 'Damjanović', 5, 4);
+
+insert into "Nurse" 
+	("Firstname", "Lastname", "HospitalId") values
+    ('Lucija', 'Novak', 1),
+    ('Filip', 'Krpan', 1),
+    ('Sara', 'Vuković', 2),
+    ('Tomislav', 'Knežević', 3),
+    ('Karla', 'Pavlović', 4);
+
+insert into "Patient" 
+	("Firstname", "Lastname", "Address", "HospitalId") values
+    ('Nikola', 'Šimić', 'Ilica 50, Zagreb', 1),
+    ('Lea', 'Tomić', 'Maksimirska 12, Zagreb', 1),
+    ('Stjepan', 'Brkić', 'Riva 7, Split', 2),
+    ('Iva', 'Galić', 'Korzo 3, Rijeka', 3),
+    ('Antun', 'Lukić', 'Europska avenija 22, Osijek', 4);
+
+insert into "DoctorHospital" 
+	("HospitalId", "DoctorId") values
+    (1, 1),
+    (4, 1),
+    (1, 2),
+    (2, 3),
+    (3, 4);
+
+insert into "DoctorPatient"
+    ("DoctorId", "PatientId", "Condition", "Treatment", "AdmissionTime", "ReleaseTime") values
+    (1, 1, 'Hypertension', 'Beta blockers', '2026-01-12 08:00', '2026-01-16 10:00'),
+    (1, 2, 'Arrhythmia', 'ECG monitoring', '2026-01-19 09:30', '2026-01-20 14:00'),
+    (2, 1, 'Migraine', 'Sumatriptan', '2026-02-02 14:00', '2026-02-02 18:00'),
+    (3, 3, 'Asthma', 'Inhaler prescription', '2026-02-09 11:00',  null),
+    (4, 4, 'Fracture', 'Cast application', '2026-02-16 13:30', '2026-02-20 11:00');
+	

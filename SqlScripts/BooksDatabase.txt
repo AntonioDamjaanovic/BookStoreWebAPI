@@ -1,0 +1,49 @@
+CREATE TABLE "Author" (
+    "Id"        INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "Firstname" VARCHAR(255) NOT NULL,
+    "Lastname"  VARCHAR(255) NOT NULL,
+    "BirthDate" DATE NOT NULL,
+    "DeathDate" DATE,
+    CONSTRAINT "chech_death"
+        CHECK ("DeathDate" IS NULL OR "DeathDate" > "BirthDate")
+);
+
+CREATE TABLE "Book" (
+    "Id"          INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "Title"       VARCHAR(255) NOT NULL,
+    "Description" TEXT,
+    "Genre"       VARCHAR(255),
+    "Pages"       INT CHECK ("Pages" > 0),
+    "Isbn"        VARCHAR(20)  NOT NULL UNIQUE,
+    "AuthorId"    INT          NOT NULL
+        REFERENCES "Author" ("Id") ON DELETE CASCADE
+);
+
+INSERT INTO "Author" ("Firstname", "Lastname", "BirthDate", "DeathDate") VALUES
+    ('George',  'Orwell',    '1903-06-25', '1950-01-21'),
+    ('J.R.R.',  'Tolkien',   '1892-01-03', '1973-09-02'),
+    ('Agatha',  'Christie',  '1890-09-15', '1976-01-12'),
+    ('Haruki',  'Murakami',  '1949-01-12',  NULL),
+    ('Stephen', 'King',      '1947-09-21',  NULL);
+
+INSERT INTO "Book"
+    ("Title", "Description", "Genre", "Pages", "Isbn", "AuthorId") VALUES
+    ('1984',
+     'A dystopian novel set in a totalitarian state where an authoritarian regime monitors and controls every aspect of citizens'' lives.',
+     'Dystopian', 328, '978-0-452-28423-4', 1),
+
+    ('The Hobbit',
+     'A fantasy adventure about a reluctant hobbit who joins a company of dwarves on a quest to reclaim their mountain kingdom from a dragon.',
+     'Fantasy', 310, '978-0-547-92822-7', 2),
+
+    ('Murder on the Orient Express',
+     'A classic detective story in which Hercule Poirot investigates a murder aboard a luxury train stranded in the snow.',
+     'Mystery', 256, '978-0-06-207350-4', 3),
+
+    ('Norwegian Wood',
+     'A coming-of-age story exploring love, loss, and memory in 1960s Tokyo.',
+     'Literary fiction', 296, '978-0-375-70402-4', 4),
+
+    ('The Shining',
+     'A psychological horror novel about a family snowed in at a haunted hotel where the father gradually descends into madness.',
+     'Horror', 447, '978-0-307-74365-7', 5);
