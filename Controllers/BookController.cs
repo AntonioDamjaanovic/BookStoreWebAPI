@@ -10,9 +10,11 @@ public class BookController : ControllerBase
     private readonly ILogger<BookController> _logger;
     private static List<Book> _books =
     [
-        new Book(id: 1, title: "Dune", description: "Lisan Al Gaib takes over the space", isbn: "123456789"),
-        new Book(id: 2, title: "1984", description: "Big Brother is watching", isbn: "98765432"),
-        new Book(id: 3, title: "Fahrenheit 451", description: "Fireman starts fires", isbn: "615251371")
+        new Book(id: 1, title: "Dune", description: "Lisan Al Gaib takes over the space", genre: "Sci-Fi", pages: 704, isbn: "123456789"),
+        new Book(id: 2, title: "1984", description: "Big Brother is watching", genre: "Classic", pages: 300, isbn: "98765432"),
+        new Book(id: 3, title: "Fahrenheit 451", description: "Fireman starts fires", genre: "Classic", pages: 180, isbn: "615251371"),
+        new Book(id: 4, title: "The last wish", description: "the witcher", genre: "Fantasy", pages: 180, isbn: "2131241"),
+        new Book(id: 5, title: "Dark matter", description: "space matrix", genre: "Sci-Fi", pages: 350, isbn: "325251")
     ];
     
     public BookController(ILogger<BookController> logger)
@@ -21,11 +23,20 @@ public class BookController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get()
+    public IActionResult Get(string? genre, int? maxPages)
     {
         if (_books.Count == 0)
         {
             return NotFound("No books found");
+        } 
+        if (!string.IsNullOrEmpty(genre))
+        {
+            return Ok(_books.Where(b => b.Genre == genre));
+        }
+
+        if (maxPages != null)
+        {
+            return Ok(_books.Where(b => b.Pages < maxPages));
         }
         return Ok(_books);
     }
