@@ -8,14 +8,6 @@ namespace Store.WebAPI.Controllers;
 public class BookController : ControllerBase
 {
     private readonly ILogger<BookController> _logger;
-    private static List<Book> _books =
-    [
-        new Book(id: 1, title: "Dune", description: "Lisan Al Gaib takes over the space", genre: "Sci-Fi", pages: 704, isbn: "123456789"),
-        new Book(id: 2, title: "1984", description: "Big Brother is watching", genre: "Classic", pages: 300, isbn: "98765432"),
-        new Book(id: 3, title: "Fahrenheit 451", description: "Fireman starts fires", genre: "Classic", pages: 180, isbn: "615251371"),
-        new Book(id: 4, title: "The last wish", description: "the witcher", genre: "Fantasy", pages: 180, isbn: "2131241"),
-        new Book(id: 5, title: "Dark matter", description: "space matrix", genre: "Sci-Fi", pages: 350, isbn: "325251")
-    ];
     
     public BookController(ILogger<BookController> logger)
     {
@@ -25,73 +17,30 @@ public class BookController : ControllerBase
     [HttpGet]
     public IActionResult Get(string? genre, int? maxPages)
     {
-        if (_books.Count == 0)
-        {
-            return NotFound("No books found");
-        } 
-        if (!string.IsNullOrEmpty(genre))
-        {
-            return Ok(_books.Where(b => b.Genre == genre));
-        }
-
-        if (maxPages != null)
-        {
-            return Ok(_books.Where(b => b.Pages < maxPages));
-        }
-        return Ok(_books);
+        return Ok();
     }
 
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        var searchedBook = _books.Find(b => b.Id == id);
-        if (searchedBook == null)
-        {
-            return NotFound($"Book with id: {id} not found");
-        }
-        
-        return Ok(searchedBook);
+        return Ok();
     }
 
     [HttpPost]
     public IActionResult Post(Book book)
     {
-        var existingBook = _books.Find(b => b.Id == book.Id);
-        if (existingBook != null)
-        {
-            return BadRequest("Book already exists");
-        }
-        
-        _books.Add(book);
-        return CreatedAtAction(nameof(Get), new { id = book.Id }, book);
+        return Ok();
     }
 
     [HttpPut("{id}")]
     public IActionResult Put(int id, Book book)
     {
-        var bookToUpdate = _books.Find(b => b.Id == id);
-        if (bookToUpdate == null)
-        {
-            return NotFound($"Book with id: {id} not found");
-        }
-        
-        bookToUpdate.Title = book.Title;
-        bookToUpdate.Description = book.Description;
-        bookToUpdate.Isbn = book.Isbn;
-        
-        return NoContent();
+        return Ok();
     }
 
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var bookToDelete = _books.Find(b => b.Id == id);
-        if (bookToDelete == null)
-        {
-            return NotFound($"Book with id: {id} not found");
-        }
-
-        _books.Remove(bookToDelete);
-        return NoContent();
+        return Ok();
     }
 }
