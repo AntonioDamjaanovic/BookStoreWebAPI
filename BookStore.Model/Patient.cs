@@ -1,0 +1,10 @@
+namespace BookStore.Model;
+
+public class Patient
+{
+    public required int Id { get; set; }
+    public required string Firstname { get; set; }
+    public required string Lastname { get; set; }
+    public required string Address { get; set; }
+    public Hospital? Hospital { get; set; }
+}

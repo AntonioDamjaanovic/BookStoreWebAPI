@@ -1,0 +1,11 @@
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/bin/Debug/net8.0/BookStore.Service.Common.deps.json
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/bin/Debug/net8.0/BookStore.Service.Common.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/bin/Debug/net8.0/BookStore.Service.Common.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/BookStore.Service.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/BookStore.Service.Common.AssemblyInfoInputs.cache
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/BookStore.Service.Common.AssemblyInfo.cs
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/BookStore.Service.Common.csproj.CoreCompileInputs.cache
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/BookStore.Service.Common.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/refint/BookStore.Service.Common.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/BookStore.Service.Common.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/obj/Debug/net8.0/ref/BookStore.Service.Common.dll

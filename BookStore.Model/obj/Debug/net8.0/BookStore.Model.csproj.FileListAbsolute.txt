@@ -1,0 +1,11 @@
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/bin/Debug/net8.0/BookStore.Model.deps.json
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/bin/Debug/net8.0/BookStore.Model.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/bin/Debug/net8.0/BookStore.Model.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/BookStore.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/BookStore.Model.AssemblyInfoInputs.cache
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/BookStore.Model.AssemblyInfo.cs
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/BookStore.Model.csproj.CoreCompileInputs.cache
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/BookStore.Model.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/refint/BookStore.Model.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/BookStore.Model.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.Model/obj/Debug/net8.0/ref/BookStore.Model.dll
