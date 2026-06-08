@@ -7,33 +7,33 @@ namespace BookStore.Service;
 
 public class AuthorService : IAuthorService
 {
-    public List<Author>? GetAll(AuthorFilter? filter)
+    public async Task<List<Author>?> GetAllAsync(AuthorFilter? filter)
     {
         AuthorRepository repository = new AuthorRepository();
-        return repository.GetAll(filter);
+        return await repository.GetAllAsync(filter);
     }
 
-    public Author? Get(int id)
+    public async Task<Author?> GetAsync(int id)
     {
         AuthorRepository repository = new AuthorRepository();
-        return repository.Get(id);
+        return await repository.GetAsync(id);
     }
 
-    public bool Add(Author author)
+    public async Task<bool> AddAsync(Author author)
     {
         AuthorRepository repository = new AuthorRepository();
-        return repository.Save(author);
+        return await repository.SaveAsync(author);
     }
 
-    public bool Update(int id, Author author)
+    public async Task<bool> UpdateAsync(int id, Author author)
     {
         AuthorRepository repository = new AuthorRepository();
-        return repository.Update(id, author);
+        return await repository.UpdateAsync(id, author);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         AuthorRepository repository = new AuthorRepository();
-        return repository.Delete(id);
+        return await repository.DeleteAsync(id);
     }
 }

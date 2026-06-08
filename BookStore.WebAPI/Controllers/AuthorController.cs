@@ -10,12 +10,12 @@ namespace BookStore.Controllers;
 public class AuthorController : ControllerBase
 {
     [HttpGet]
-    public IActionResult Get(string? firstName, string? lastName)
+    public async Task<IActionResult> GetAsync(string? firstName, string? lastName)
     {
         AuthorService service = new AuthorService();
         AuthorFilter filter = new AuthorFilter(firstName, lastName);
         
-        List<Author>? authors = service.GetAll(filter);
+        List<Author>? authors = await service.GetAllAsync(filter);
         if (authors == null)
         {
             return NotFound();
@@ -24,10 +24,10 @@ public class AuthorController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult Get(int id)
+    public async Task<IActionResult> GetAsync(int id)
     {
         AuthorService service = new AuthorService();
-        Author? author = service.Get(id);
+        Author? author = await service.GetAsync(id);
         if (author == null)
         {
             return NotFound();
@@ -36,10 +36,10 @@ public class AuthorController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] Author author)
+    public async Task<IActionResult> PostAsync([FromBody] Author author)
     {
         AuthorService service = new AuthorService();
-        if (!service.Add(author))
+        if (!await service.AddAsync(author))
         {
             return BadRequest();
         }
@@ -47,10 +47,10 @@ public class AuthorController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] Author author)
+    public async Task<IActionResult> PutAsync(int id, [FromBody] Author author)
     {
         AuthorService service = new AuthorService();
-        if (!service.Update(id, author))
+        if (!await service.UpdateAsync(id, author))
         {
             return BadRequest();
         }
@@ -58,10 +58,10 @@ public class AuthorController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> DeleteAsync(int id)
     {
         AuthorService service = new AuthorService();
-        if (!service.Delete(id))
+        if (!await service.DeleteAsync(id))
         {
             return BadRequest();
         }

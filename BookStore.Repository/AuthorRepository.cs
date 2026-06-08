@@ -14,11 +14,11 @@ public class AuthorRepository : IAuthorRepository
                                       "Password=123456;" +
                                       "Database=BooksDatabase";
 
-    public List<Author>? GetAll(AuthorFilter? filter)
+    public async Task<List<Author>?> GetAllAsync(AuthorFilter? filter)
     {
         try
         {
-            using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             
             StringBuilder commandText = new StringBuilder();
             commandText.Append(
@@ -28,7 +28,7 @@ public class AuthorRepository : IAuthorRepository
                 "LEFT JOIN \"Book\" b ON a.\"Id\" = b.\"AuthorId\" " +
                 "WHERE 1 = 1");
             
-            using NpgsqlCommand command = new NpgsqlCommand();
+            await using NpgsqlCommand command = new NpgsqlCommand();
             
             if (filter != null && filter.FirstName != null)
             {
@@ -46,10 +46,10 @@ public class AuthorRepository : IAuthorRepository
             command.Connection = connection;
             
             connection.Open();
-            var reader = command.ExecuteReader();
+            await using NpgsqlDataReader reader = await command.ExecuteReaderAsync();
 
             var authorsById = new Dictionary<int, Author>();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int authorId = reader.GetFieldValue<int>(0);
 
@@ -90,22 +90,22 @@ public class AuthorRepository : IAuthorRepository
         }
     }
 
-    public Author? Get(int id)
+    public async Task<Author?> GetAsync(int id)
     {
         try
         {
             Author author = new Author();
             
-            using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             string commandText =
                 "SELECT * FROM \"Author\" WHERE \"Id\" = @Id";
-            using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
+            await using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
             
             command.Parameters.AddWithValue("Id", id);
             connection.Open();
             
-            var reader = command.ExecuteReader();
-            reader.Read();
+            await using NpgsqlDataReader reader = await command.ExecuteReaderAsync();
+            await reader.ReadAsync();
             
             author.Id = reader.GetFieldValue<int>(0);
             author.FirstName = reader.GetFieldValue<string>(1);
@@ -123,15 +123,15 @@ public class AuthorRepository : IAuthorRepository
         }
     }
 
-    public bool Save(Author author)
+    public async Task<bool> SaveAsync(Author author)
     {
         try
         {
-            using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             string commandText =
                 "INSERT INTO \"Author\" (\"FirstName\", \"LastName\", \"BirthDate\", \"DeathDate\") " +
                 "VALUES (@FirstName, @LastName, @BirthDate, @DeathDate)";
-            using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
+            await using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
             
             command.Parameters.AddWithValue("FirstName", author.FirstName);
             command.Parameters.AddWithValue("LastName", author.LastName);
@@ -139,7 +139,7 @@ public class AuthorRepository : IAuthorRepository
             command.Parameters.AddWithValue("DeathDate", author.DeathDate != null ? (object)author.DeathDate : DBNull.Value);
             
             connection.Open();
-            int rowsChanged = command.ExecuteNonQuery();
+            int rowsChanged = await command.ExecuteNonQueryAsync();
             connection.Close();
             
             return rowsChanged > 0;
@@ -150,14 +150,14 @@ public class AuthorRepository : IAuthorRepository
         }
     }
 
-    public bool Update(int id, Author author)
+    public async Task<bool> UpdateAsync(int id, Author author)
     {
         try
         {
-            using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             string commandText =
                 "UPDATE \"Author\" SET \"FirstName\" = @FirstName, \"LastName\" = @LastName, \"BirthDate\" = @BirthDate, \"DeathDate\" = @DeathDate WHERE \"Id\" = @Id";
-            using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
+            await using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
 
             command.Parameters.AddWithValue("Id", id);
             command.Parameters.AddWithValue("FirstName", author.FirstName);
@@ -166,7 +166,7 @@ public class AuthorRepository : IAuthorRepository
             command.Parameters.AddWithValue("DeathDate", author.DeathDate != null ? (object)author.DeathDate : DBNull.Value);
 
             connection.Open();
-            int rowsChanged = command.ExecuteNonQuery();
+            int rowsChanged = await command.ExecuteNonQueryAsync();
             connection.Close();
             
             return rowsChanged > 0;
@@ -177,19 +177,19 @@ public class AuthorRepository : IAuthorRepository
         }
     }
 
-    public bool Delete(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         try
         {
-            using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             string commandText =
                 "DELETE FROM \"Author\" WHERE \"Id\" = @Id";
-            using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
+            await using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
             
             command.Parameters.AddWithValue("Id", id);
             
             connection.Open();
-            int rowsChanged = command.ExecuteNonQuery();
+            int rowsChanged = await command.ExecuteNonQueryAsync();
             connection.Close();
             
             return rowsChanged > 0;

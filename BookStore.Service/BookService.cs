@@ -7,33 +7,33 @@ namespace BookStore.Service;
 
 public class BookService : IBookService
 {
-    public List<Book>? GetAll(BookFilter? filter)
+    public async Task<List<Book>?> GetAllAsync(BookFilter? filter)
     {
         BookRepository repository = new BookRepository();
-        return repository.GetAll(filter);
+        return await repository.GetAllAsync(filter);
     }
 
-    public Book? Get(int id)
+    public async Task<Book?> GetAsync(int id)
     {
         BookRepository repository = new BookRepository();
-        return repository.Get(id);
+        return await repository.GetAsync(id);
     }
 
-    public bool Add(Book book)
+    public async Task<bool> AddAsync(Book book)
     {
         BookRepository repository = new BookRepository();
-        return repository.Save(book);
+        return await repository.SaveAsync(book);
     }
 
-    public bool Update(int id, Book book)
+    public async Task<bool> Update(int id, Book book)
     {
         BookRepository repository = new BookRepository();
-        return repository.Update(id, book);
+        return await repository.UpdateAsync(id, book);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         BookRepository repository = new BookRepository();
-        return repository.Delete(id);
+        return await repository.DeleteAsync(id);
     }
 }

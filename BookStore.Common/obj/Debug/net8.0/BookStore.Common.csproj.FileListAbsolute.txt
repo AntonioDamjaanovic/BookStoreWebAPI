@@ -9,3 +9,4 @@
 /Users/antonio/RiderProjects/BookStore/BookStore.Common/obj/Debug/net8.0/refint/BookStore.Common.dll
 /Users/antonio/RiderProjects/BookStore/BookStore.Common/obj/Debug/net8.0/BookStore.Common.pdb
 /Users/antonio/RiderProjects/BookStore/BookStore.Common/obj/Debug/net8.0/ref/BookStore.Common.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Common/obj/Debug/net8.0/BookStore.Common.sourcelink.json

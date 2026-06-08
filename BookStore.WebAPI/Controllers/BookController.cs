@@ -10,12 +10,12 @@ namespace BookStore.Controllers;
 public class BookController : ControllerBase
 {
     [HttpGet]
-    public IActionResult Get(string? genre)
+    public async Task<IActionResult> GetAsync(string? genre)
     {
         BookService service = new BookService();
         BookFilter filter = new BookFilter(genre);
         
-        List<Book>? books = service.GetAll(filter);
+        List<Book>? books = await service.GetAllAsync(filter);
         if (books == null)
         {
             return NotFound();
@@ -24,10 +24,10 @@ public class BookController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult Get(int id)
+    public async Task<IActionResult> GetAsync(int id)
     {
         BookService service = new BookService();
-        Book? book = service.Get(id);
+        Book? book = await service.GetAsync(id);
         if (book == null)
         {
             return NotFound();
@@ -36,10 +36,10 @@ public class BookController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] Book book)
+    public async Task<IActionResult> PostAsync([FromBody] Book book)
     {
         BookService service = new BookService();
-        if (!service.Add(book))
+        if (!await service.AddAsync(book))
         {
             return BadRequest();
         }
@@ -47,10 +47,10 @@ public class BookController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] Book book)
+    public async Task<IActionResult> PutAsync(int id, [FromBody] Book book)
     {
         BookService service = new BookService();
-        if (!service.Update(id, book))
+        if (!await service.Update(id, book))
         {
             return BadRequest();
         }
@@ -58,10 +58,10 @@ public class BookController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> DeleteAsync(int id)
     {
         BookService service = new BookService();
-        if (!service.Delete(id))
+        if (!await service.Delete(id))
         {
             return BadRequest();
         }
