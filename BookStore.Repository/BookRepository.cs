@@ -1,5 +1,5 @@
 using System.Text;
-using BookStore.Model;
+using BookStore.Model.Entity;
 using BookStore.Repository.Common;
 using BookStore.Common;
 using Npgsql;

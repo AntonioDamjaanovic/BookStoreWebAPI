@@ -1,5 +1,7 @@
+using AutoMapper;
 using BookStore.Common;
-using BookStore.Model;
+using BookStore.Model.Entity;
+using BookStore.Model.Rest;
 using BookStore.Service.Common;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +12,11 @@ namespace BookStore.Controllers;
 public class BookController : ControllerBase
 {
     private IBookService _service;
+    private MapperConfiguration _config = new (cfg =>
+    {
+        cfg.CreateMap<Book, BookDto>();
+        cfg.CreateMap<BookDto, Book>();
+    }, new LoggerFactory());
 
     public BookController(IBookService service)
     {
@@ -21,27 +28,40 @@ public class BookController : ControllerBase
         BookFilter filter = new BookFilter(genre);
         
         List<Book>? books = await _service.GetAllAsync(filter);
-        if (books == null)
+        List<BookDto> bookDtos = new List<BookDto>();
+        var mapper = _config.CreateMapper();
+        
+        if (books != null)
         {
-            return NotFound();
+            foreach (var book in books)
+            {
+                BookDto bookDto = mapper.Map<BookDto>(book);
+                bookDtos.Add(bookDto);
+            }
+            return Ok(bookDtos);
         }
-        return Ok(books);
+        return NotFound();
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(int id)
     {
         Book? book = await _service.GetAsync(id);
-        if (book == null)
+        var mapper = _config.CreateMapper();
+        if (book != null)
         {
-            return NotFound();
+            BookDto bookDto = mapper.Map<BookDto>(book);
+            return Ok(bookDto);
         }
-        return Ok(book);
+        return NotFound();
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] Book book)
+    public async Task<IActionResult> PostAsync([FromBody] BookDto bookDto)
     {
+        var mapper = _config.CreateMapper();
+        Book book = mapper.Map<Book>(bookDto);
+        
         if (!await _service.AddAsync(book))
         {
             return BadRequest();
@@ -50,8 +70,11 @@ public class BookController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(int id, [FromBody] Book book)
+    public async Task<IActionResult> PutAsync(int id, [FromBody] BookDto bookDto)
     {
+        var mapper = _config.CreateMapper();
+        Book book = mapper.Map<Book>(bookDto);
+        
         if (!await _service.Update(id, book))
         {
             return BadRequest();

@@ -1,5 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using BookStore.Model.Entity;
+using BookStore.Model.Rest;
 using BookStore.Repository;
 using BookStore.Repository.Common;
 using BookStore.Service;
@@ -30,6 +33,12 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
         builder.RegisterType<BookRepository>().As<IBookRepository>().InstancePerDependency();
     }
 );
+
+var config = new MapperConfiguration(cfg =>
+{
+    cfg.CreateMap<Author, AuthorDto>();
+    cfg.CreateMap<Book, BookDto>();
+}, new LoggerFactory());
 
 var app = builder.Build();
 

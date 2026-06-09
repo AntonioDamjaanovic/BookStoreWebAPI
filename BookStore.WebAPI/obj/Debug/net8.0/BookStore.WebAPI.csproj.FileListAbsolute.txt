@@ -48,3 +48,11 @@
 /Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Npgsql.dll
 /Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/BookStore.Repository.dll
 /Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/BookStore.Repository.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/AutoMapper.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.WebAPI/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll

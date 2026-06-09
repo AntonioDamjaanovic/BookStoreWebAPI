@@ -435,6 +435,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[16.1.1, )"
+            },
             "Autofac": {
               "target": "Package",
               "version": "[9.1.0, )"

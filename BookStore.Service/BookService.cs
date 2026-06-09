@@ -1,5 +1,5 @@
 using BookStore.Common;
-using BookStore.Model;
+using BookStore.Model.Entity;
 using BookStore.Repository.Common;
 using BookStore.Service.Common;
 
