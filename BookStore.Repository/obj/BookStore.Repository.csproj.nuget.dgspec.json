@@ -141,7 +141,14 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Common/BookStore.Common.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Common/BookStore.Common.csproj"
+              },
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Model/BookStore.Model.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Model/BookStore.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

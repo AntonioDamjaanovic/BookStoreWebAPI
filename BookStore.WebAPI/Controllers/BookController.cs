@@ -1,6 +1,6 @@
 using BookStore.Common;
 using BookStore.Model;
-using BookStore.Service;
+using BookStore.Service.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers;
@@ -9,13 +9,18 @@ namespace BookStore.Controllers;
 [Route("[controller]")]
 public class BookController : ControllerBase
 {
+    private IBookService _service;
+
+    public BookController(IBookService service)
+    {
+        _service = service;
+    }
     [HttpGet]
     public async Task<IActionResult> GetAsync(string? genre)
     {
-        BookService service = new BookService();
         BookFilter filter = new BookFilter(genre);
         
-        List<Book>? books = await service.GetAllAsync(filter);
+        List<Book>? books = await _service.GetAllAsync(filter);
         if (books == null)
         {
             return NotFound();
@@ -26,8 +31,7 @@ public class BookController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(int id)
     {
-        BookService service = new BookService();
-        Book? book = await service.GetAsync(id);
+        Book? book = await _service.GetAsync(id);
         if (book == null)
         {
             return NotFound();
@@ -38,8 +42,7 @@ public class BookController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] Book book)
     {
-        BookService service = new BookService();
-        if (!await service.AddAsync(book))
+        if (!await _service.AddAsync(book))
         {
             return BadRequest();
         }
@@ -49,8 +52,7 @@ public class BookController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] Book book)
     {
-        BookService service = new BookService();
-        if (!await service.Update(id, book))
+        if (!await _service.Update(id, book))
         {
             return BadRequest();
         }
@@ -60,8 +62,7 @@ public class BookController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        BookService service = new BookService();
-        if (!await service.Delete(id))
+        if (!await _service.Delete(id))
         {
             return BadRequest();
         }

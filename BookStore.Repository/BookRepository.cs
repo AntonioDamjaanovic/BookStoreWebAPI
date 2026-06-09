@@ -133,7 +133,7 @@ public class BookRepository : IBookRepository
         {
             await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             string commandText =
-                "UPDATE \"Book\" SET \"Title\" = @Title, \"Description\" = @Description, \"Genre\" = @Genre, \"Pages\" = @Pages, \"Isbn\" = @Pages, \"AuthorId\" = @AuthorId " +
+                "UPDATE \"Book\" SET \"Title\" = @Title, \"Description\" = @Description, \"Genre\" = @Genre, \"Pages\" = @Pages, \"Isbn\" = @Isbn, \"AuthorId\" = @AuthorId " +
                 "WHERE \"Id\" = @Id";
             await using NpgsqlCommand command = new NpgsqlCommand(commandText, connection);
             

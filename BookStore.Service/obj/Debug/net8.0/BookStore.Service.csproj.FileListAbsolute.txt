@@ -2,8 +2,6 @@
 /Users/antonio/RiderProjects/BookStore/BookStore.Service/bin/Debug/net8.0/BookStore.Service.dll
 /Users/antonio/RiderProjects/BookStore/BookStore.Service/bin/Debug/net8.0/BookStore.Service.pdb
 /Users/antonio/RiderProjects/BookStore/BookStore.Service/bin/Debug/net8.0/BookStore.Model.dll
-/Users/antonio/RiderProjects/BookStore/BookStore.Service/bin/Debug/net8.0/BookStore.Repository.dll
-/Users/antonio/RiderProjects/BookStore/BookStore.Service/bin/Debug/net8.0/BookStore.Repository.pdb
 /Users/antonio/RiderProjects/BookStore/BookStore.Service/bin/Debug/net8.0/BookStore.Model.pdb
 /Users/antonio/RiderProjects/BookStore/BookStore.Service/obj/Debug/net8.0/BookStore.Service.csproj.AssemblyReference.cache
 /Users/antonio/RiderProjects/BookStore/BookStore.Service/obj/Debug/net8.0/BookStore.Service.GeneratedMSBuildEditorConfig.editorconfig

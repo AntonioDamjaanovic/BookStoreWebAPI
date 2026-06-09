@@ -1,7 +1,7 @@
 using BookStore.Common;
 using Microsoft.AspNetCore.Mvc;
-using BookStore.Service;
 using BookStore.Model;
+using BookStore.Service.Common;
 
 namespace BookStore.Controllers;
 
@@ -9,13 +9,19 @@ namespace BookStore.Controllers;
 [Route("[controller]")]
 public class AuthorController : ControllerBase
 {
+    private IAuthorService _service;
+    
+    public AuthorController(IAuthorService service)
+    {
+        _service = service;
+    }
+    
     [HttpGet]
     public async Task<IActionResult> GetAsync(string? firstName, string? lastName)
     {
-        AuthorService service = new AuthorService();
         AuthorFilter filter = new AuthorFilter(firstName, lastName);
         
-        List<Author>? authors = await service.GetAllAsync(filter);
+        List<Author>? authors = await _service.GetAllAsync(filter);
         if (authors == null)
         {
             return NotFound();
@@ -26,8 +32,7 @@ public class AuthorController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(int id)
     {
-        AuthorService service = new AuthorService();
-        Author? author = await service.GetAsync(id);
+        Author? author = await _service.GetAsync(id);
         if (author == null)
         {
             return NotFound();
@@ -38,8 +43,7 @@ public class AuthorController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] Author author)
     {
-        AuthorService service = new AuthorService();
-        if (!await service.AddAsync(author))
+        if (!await _service.AddAsync(author))
         {
             return BadRequest();
         }
@@ -49,8 +53,7 @@ public class AuthorController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] Author author)
     {
-        AuthorService service = new AuthorService();
-        if (!await service.UpdateAsync(id, author))
+        if (!await _service.UpdateAsync(id, author))
         {
             return BadRequest();
         }
@@ -60,8 +63,7 @@ public class AuthorController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        AuthorService service = new AuthorService();
-        if (!await service.DeleteAsync(id))
+        if (!await _service.DeleteAsync(id))
         {
             return BadRequest();
         }

@@ -9,3 +9,10 @@
 /Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/obj/Debug/net8.0/refint/BookStore.Repository.Common.dll
 /Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/obj/Debug/net8.0/BookStore.Repository.Common.pdb
 /Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/obj/Debug/net8.0/ref/BookStore.Repository.Common.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/bin/Debug/net8.0/BookStore.Common.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/bin/Debug/net8.0/BookStore.Model.dll
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/bin/Debug/net8.0/BookStore.Common.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/bin/Debug/net8.0/BookStore.Model.pdb
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/obj/Debug/net8.0/BookStore.Repository.Common.csproj.AssemblyReference.cache
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/obj/Debug/net8.0/BookStore.Repository.Common.sourcelink.json
+/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/obj/Debug/net8.0/BookStor.348E1C6F.Up2Date

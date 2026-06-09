@@ -73,6 +73,10 @@
         }
       },
       "BookStore.Repository.Common/1.0.0": {
+        "dependencies": {
+          "BookStore.Common": "1.0.0",
+          "BookStore.Model": "1.0.0"
+        },
         "runtime": {
           "BookStore.Repository.Common.dll": {
             "assemblyVersion": "1.0.0",

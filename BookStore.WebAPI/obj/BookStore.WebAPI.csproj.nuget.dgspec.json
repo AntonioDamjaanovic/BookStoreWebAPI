@@ -141,7 +141,14 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Common/BookStore.Common.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Common/BookStore.Common.csproj"
+              },
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Model/BookStore.Model.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Model/BookStore.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -273,7 +280,14 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Common/BookStore.Common.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Common/BookStore.Common.csproj"
+              },
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Model/BookStore.Model.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Model/BookStore.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -332,8 +346,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/antonio/RiderProjects/BookStore/BookStore.Repository/BookStore.Repository.csproj": {
-                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Repository/BookStore.Repository.csproj"
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/BookStore.Repository.Common.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Repository.Common/BookStore.Repository.Common.csproj"
               },
               "/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/BookStore.Service.Common.csproj": {
                 "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Service.Common/BookStore.Service.Common.csproj"
@@ -397,6 +411,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "/Users/antonio/RiderProjects/BookStore/BookStore.Repository/BookStore.Repository.csproj": {
+                "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Repository/BookStore.Repository.csproj"
+              },
               "/Users/antonio/RiderProjects/BookStore/BookStore.Service/BookStore.Service.csproj": {
                 "projectPath": "/Users/antonio/RiderProjects/BookStore/BookStore.Service/BookStore.Service.csproj"
               }
@@ -418,6 +435,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[9.1.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
