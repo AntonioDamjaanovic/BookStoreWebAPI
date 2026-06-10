@@ -12,16 +12,12 @@ namespace BookStore.Controllers;
 public class AuthorController : ControllerBase
 {
     private IAuthorService _service;
+    private IMapper _mapper;
     
-    private MapperConfiguration _config = new (cfg =>
-    {
-        cfg.CreateMap<Author, AuthorDto>();
-        cfg.CreateMap<AuthorDto, Author>();
-    }, new LoggerFactory());
-    
-    public AuthorController(IAuthorService service)
+    public AuthorController(IAuthorService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
     
     [HttpGet]
@@ -31,13 +27,12 @@ public class AuthorController : ControllerBase
         
         List<Author>? authors = await _service.GetAllAsync(filter);
         List<AuthorDto> authorDtos = new List<AuthorDto>();
-        var mapper = _config.CreateMapper();
         
         if (authors != null)
         {
             foreach (Author author in authors)
             {
-                AuthorDto? authorDto = mapper.Map<AuthorDto>(author);
+                AuthorDto? authorDto = _mapper.Map<AuthorDto>(author);
                 authorDtos.Add(authorDto);
             }
             return Ok(authorDtos);
@@ -49,10 +44,9 @@ public class AuthorController : ControllerBase
     public async Task<IActionResult> GetAsync(int id)
     {
         Author? author = await _service.GetAsync(id);
-        var mapper = _config.CreateMapper();
         if (author != null)
         {
-            AuthorDto authorDto = mapper.Map<AuthorDto>(author);
+            AuthorDto authorDto = _mapper.Map<AuthorDto>(author);
             return Ok(authorDto);
         }
         return NotFound();
@@ -61,8 +55,7 @@ public class AuthorController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] AuthorDto authorDto)
     {
-        var mapper = _config.CreateMapper();
-        Author author = mapper.Map<Author>(authorDto);
+        Author author = _mapper.Map<Author>(authorDto);
         if (!await _service.AddAsync(author))
         {
             return BadRequest();
@@ -73,8 +66,7 @@ public class AuthorController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] AuthorDto authorDto)
     {
-        var mapper = _config.CreateMapper();
-        Author author = mapper.Map<Author>(authorDto);
+        Author author = _mapper.Map<Author>(authorDto);
         
         if (!await _service.UpdateAsync(id, author))
         {

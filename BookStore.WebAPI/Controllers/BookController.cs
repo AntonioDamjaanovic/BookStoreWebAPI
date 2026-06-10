@@ -12,15 +12,12 @@ namespace BookStore.Controllers;
 public class BookController : ControllerBase
 {
     private IBookService _service;
-    private MapperConfiguration _config = new (cfg =>
-    {
-        cfg.CreateMap<Book, BookDto>();
-        cfg.CreateMap<BookDto, Book>();
-    }, new LoggerFactory());
+    private IMapper _mapper;
 
-    public BookController(IBookService service)
+    public BookController(IBookService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
     [HttpGet]
     public async Task<IActionResult> GetAsync(string? genre)
@@ -29,13 +26,12 @@ public class BookController : ControllerBase
         
         List<Book>? books = await _service.GetAllAsync(filter);
         List<BookDto> bookDtos = new List<BookDto>();
-        var mapper = _config.CreateMapper();
         
         if (books != null)
         {
             foreach (var book in books)
             {
-                BookDto bookDto = mapper.Map<BookDto>(book);
+                BookDto bookDto = _mapper.Map<BookDto>(book);
                 bookDtos.Add(bookDto);
             }
             return Ok(bookDtos);
@@ -47,10 +43,9 @@ public class BookController : ControllerBase
     public async Task<IActionResult> GetAsync(int id)
     {
         Book? book = await _service.GetAsync(id);
-        var mapper = _config.CreateMapper();
         if (book != null)
         {
-            BookDto bookDto = mapper.Map<BookDto>(book);
+            BookDto bookDto = _mapper.Map<BookDto>(book);
             return Ok(bookDto);
         }
         return NotFound();
@@ -59,8 +54,7 @@ public class BookController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] BookDto bookDto)
     {
-        var mapper = _config.CreateMapper();
-        Book book = mapper.Map<Book>(bookDto);
+        Book book = _mapper.Map<Book>(bookDto);
         
         if (!await _service.AddAsync(book))
         {
@@ -72,8 +66,7 @@ public class BookController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] BookDto bookDto)
     {
-        var mapper = _config.CreateMapper();
-        Book book = mapper.Map<Book>(bookDto);
+        Book book = _mapper.Map<Book>(bookDto);
         
         if (!await _service.Update(id, book))
         {

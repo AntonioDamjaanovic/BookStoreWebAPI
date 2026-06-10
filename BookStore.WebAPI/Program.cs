@@ -17,6 +17,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var _config = new MapperConfiguration (cfg =>
+{
+    cfg.CreateMap<Author, AuthorDto>().ReverseMap();
+    cfg.CreateMap<Book, BookDto>().ReverseMap();
+}, new LoggerFactory());
+
+IMapper mapper = _config.CreateMapper();
+
 // DEFAULT DI
 // builder.Services.AddTransient<IAuthorService, AuthorService>();
 // builder.Services.AddTransient<IBookService, BookService>();
@@ -31,14 +39,9 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
         builder.RegisterType<BookService>().As<IBookService>().InstancePerDependency();
         builder.RegisterType<AuthorRepository>().As<IAuthorRepository>().InstancePerDependency();
         builder.RegisterType<BookRepository>().As<IBookRepository>().InstancePerDependency();
+        builder.RegisterInstance(mapper).As<IMapper>().SingleInstance();
     }
 );
-
-var config = new MapperConfiguration(cfg =>
-{
-    cfg.CreateMap<Author, AuthorDto>();
-    cfg.CreateMap<Book, BookDto>();
-}, new LoggerFactory());
 
 var app = builder.Build();
 
